@@ -1,0 +1,23 @@
+{
+  "name": "@hexlet/analytics-plugin-carrotquest",
+  "version": "0.0.1",
+  "description": "CarrotQuest plugin for Analytics",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hexlet/analytics-plugin-carrotquest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hexlet/analytics-plugin-carrotquest/issues"
+  },
+  "homepage": "https://github.com/Hexlet/analytics-plugin-carrotquest#readme",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
