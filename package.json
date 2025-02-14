@@ -1,6 +1,7 @@
 {
   "name": "@hexlet/analytics-plugin-carrotquest",
   "version": "0.0.1",
+  "type": "module",
   "description": "CarrotQuest plugin for Analytics",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,6 +19,11 @@
   },
   "homepage": "https://github.com/Hexlet/analytics-plugin-carrotquest#readme",
   "devDependencies": {
-    "typescript": "^5.7.3"
+    "@eslint/js": "^9.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.0",
+    "@typescript-eslint/parser": "^8.24.0",
+    "eslint": "^9.20.1",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0"
   }
 }
