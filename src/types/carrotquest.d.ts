@@ -1,7 +1,13 @@
 export type CarrotquestOptions = {
-  appId: string;
-  userId?: string;
-  userHash?: string;
+  apiKey: string;
+  propsMapping: { [key: string]: string };
+  eventsMapping: { [key: string]: string };
+};
+
+export type CarrotquestProp = {
+  op: string;
+  key: string;
+  value: string | boolean | number | null;
 };
 
 export type CarrotquestMethods = "connect" | "track" | "identify" | "auth" | "onReady" | "addCallback" | "removeCallback" | "trackMessageInteraction";
