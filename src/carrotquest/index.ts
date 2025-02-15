@@ -1,11 +1,11 @@
-import { CarrotquestOptions, CarrotquestMethods, CarrotquestProp } from "@/types/carrotquest";
+import { CarrotquestOptions, CarrotquestMethods, CarrotquestProp } from '@/types/carrotquest';
 
 const initCarrotquest = (apiKey: string): void => {
-  if (typeof window.carrotquest === "undefined") {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
+  if (typeof window.carrotquest === 'undefined') {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
     script.async = true;
-    script.src = "https://cdn.carrotquest.app/api.min.js";
+    script.src = 'https://cdn.carrotquest.app/api.min.js';
     document.head.appendChild(script);
 
     window.carrotquest = {};
@@ -13,8 +13,8 @@ const initCarrotquest = (apiKey: string): void => {
     window.carrotquest.settings = {};
 
     const methods: CarrotquestMethods[] = [
-      "connect", "track", "identify", "auth", "onReady",
-      "addCallback", "removeCallback", "trackMessageInteraction"
+      'connect', 'track', 'identify', 'auth', 'onReady',
+      'addCallback', 'removeCallback', 'trackMessageInteraction'
     ];
 
     methods.forEach((method) => {
@@ -28,21 +28,21 @@ const initCarrotquest = (apiKey: string): void => {
 };
 
 const prepareUserProps = (
-  props: { [key: string]: string | boolean | number | null },
-  propsMapping: { [key: string]: string },
-  operation: string = 'update_or_create'
+  props: Record<string, string | boolean | number | null>,
+  propsMapping: Record<string, string>,
+  operation = 'update_or_create'
 ): CarrotquestProp[] => {
-  const defaultPropsMapping: { [key: string]: string } = {
-    email: "$email",
-    name: "$name",
-    phone: "$phone",
+  const defaultPropsMapping: Record<string, string> = {
+    email: '$email',
+    name: '$name',
+    phone: '$phone',
   };
 
   const mapping = { ...defaultPropsMapping, ...propsMapping };
 
   return Object.keys(mapping)
     .map((key: string): CarrotquestProp | null => {
-      if (typeof props[key] === "undefined") {
+      if (typeof props[key] === 'undefined') {
         return null;
       }
 
@@ -56,9 +56,9 @@ const prepareUserProps = (
 };
 
 const prepareEventProps = (
-  props: { [key: string]: string | boolean | number | null } = {},
-  propsMapping: { [key: string]: string }
-): { [key: string]: string | boolean | number | null } | null => {
+  props: Record<string, string | boolean | number | null> = {},
+  propsMapping: Record<string, string>
+): Record<string, string | boolean | number | null> | null => {
   if (Object.keys(props).length === 0) {
     return null;
   }
@@ -69,11 +69,11 @@ const prepareEventProps = (
       acc[newKey] = value;
     }
     return acc;
-  }, {} as { [key: string]: string | boolean | number | null });
+  }, {} as Record<string, string | boolean | number | null>);
 };
 
-export default ({ apiKey, propsMapping, eventsMapping }: CarrotquestOptions): any => ({
-  name: "carrotquest",
+export default ({ apiKey, propsMapping, eventsMapping }: CarrotquestOptions): object => ({
+  name: 'carrotquest',
 
   initialize: (): void => {
     if (apiKey) {
@@ -81,12 +81,12 @@ export default ({ apiKey, propsMapping, eventsMapping }: CarrotquestOptions): an
     }
   },
 
-  loaded: (): boolean => typeof window.carrotquest !== undefined,
+  loaded: (): boolean => typeof window.carrotquest !== 'undefined',
 
   identify: ({ payload }: {
     payload: {
       userId: string;
-      traits: { [key: string]: string | boolean | number };
+      traits: Record<string, string | boolean | number>;
     };
   }): void => {
     const { traits } = payload;
@@ -100,7 +100,7 @@ export default ({ apiKey, propsMapping, eventsMapping }: CarrotquestOptions): an
   track: ({ payload }: {
     payload: {
       event: string;
-      properties?: { [key: string]: string | boolean | number };
+      properties?: Record<string, string | boolean | number>;
     };
   }): void => {
     const { event, properties } = payload;

@@ -1,20 +1,20 @@
-export type CarrotquestOptions = {
+export interface CarrotquestOptions {
   apiKey: string;
-  propsMapping: { [key: string]: string };
-  eventsMapping: { [key: string]: string };
-};
+  propsMapping: Record<string, string>;
+  eventsMapping: Record<string, string>;
+}
 
-export type CarrotquestProp = {
+export interface CarrotquestProp {
   op: string;
   key: string;
   value: string | boolean | number | null;
-};
+}
 
-export type CarrotquestMethods = "connect" | "track" | "identify" | "auth" | "onReady" | "addCallback" | "removeCallback" | "trackMessageInteraction";
+export type CarrotquestMethods = 'connect' | 'track' | 'identify' | 'auth' | 'onReady' | 'addCallback' | 'removeCallback' | 'trackMessageInteraction';
 
 declare global {
   interface Window {
-    carrotquest: any;
-    carrotquestasync: any;
+    carrotquest: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+    carrotquestasync: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   }
 }

@@ -1,16 +1,16 @@
 const initCarrotquest = (apiKey) => {
-    if (typeof window.carrotquest === "undefined") {
-        const script = document.createElement("script");
-        script.type = "text/javascript";
+    if (typeof window.carrotquest === 'undefined') {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
         script.async = true;
-        script.src = "https://cdn.carrotquest.app/api.min.js";
+        script.src = 'https://cdn.carrotquest.app/api.min.js';
         document.head.appendChild(script);
         window.carrotquest = {};
         window.carrotquestasync = [];
         window.carrotquest.settings = {};
         const methods = [
-            "connect", "track", "identify", "auth", "onReady",
-            "addCallback", "removeCallback", "trackMessageInteraction"
+            'connect', 'track', 'identify', 'auth', 'onReady',
+            'addCallback', 'removeCallback', 'trackMessageInteraction'
         ];
         methods.forEach((method) => {
             window.carrotquest[method] = function () {
@@ -22,14 +22,14 @@ const initCarrotquest = (apiKey) => {
 };
 const prepareUserProps = (props, propsMapping, operation = 'update_or_create') => {
     const defaultPropsMapping = {
-        email: "$email",
-        name: "$name",
-        phone: "$phone",
+        email: '$email',
+        name: '$name',
+        phone: '$phone',
     };
     const mapping = { ...defaultPropsMapping, ...propsMapping };
     return Object.keys(mapping)
         .map((key) => {
-        if (typeof props[key] === "undefined") {
+        if (typeof props[key] === 'undefined') {
             return null;
         }
         return {
@@ -53,13 +53,13 @@ const prepareEventProps = (props = {}, propsMapping) => {
     }, {});
 };
 export default ({ apiKey, propsMapping, eventsMapping }) => ({
-    name: "carrotquest",
+    name: 'carrotquest',
     initialize: () => {
         if (apiKey) {
             initCarrotquest(apiKey);
         }
     },
-    loaded: () => typeof window.carrotquest !== undefined,
+    loaded: () => typeof window.carrotquest !== 'undefined',
     identify: ({ payload }) => {
         const { traits } = payload;
         const preparedProps = prepareUserProps(traits, propsMapping);
