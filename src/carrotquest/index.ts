@@ -1,6 +1,6 @@
 import { CarrotquestOptions, CarrotquestMethods, CarrotquestProp } from '@/types/carrotquest';
 
-const initCarrotquest = (apiKey: string): void => {
+const initCarrotquest = (apiKey: CarrotquestOptions['apiKey']): void => {
   if (typeof window.carrotquest === 'undefined') {
     const script = document.createElement('script');
     script.type = 'text/javascript';
