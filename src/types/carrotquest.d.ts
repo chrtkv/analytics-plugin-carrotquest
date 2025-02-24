@@ -1,3 +1,8 @@
+export interface Plugin {
+  name: string;
+  [key: string]: unknown;
+}
+
 export interface CarrotquestOptions {
   apiKey: string;
   propsMapping?: Record<string, string>;

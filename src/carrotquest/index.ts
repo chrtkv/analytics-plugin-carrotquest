@@ -1,4 +1,4 @@
-import { CarrotquestOptions, CarrotquestMethods, CarrotquestUserProp } from '@/types/carrotquest';
+import { CarrotquestOptions, CarrotquestMethods, CarrotquestUserProp, Plugin } from '@/types/carrotquest';
 
 const initCarrotquest = (apiKey: CarrotquestOptions['apiKey']): void => {
   if (typeof window.carrotquest === 'undefined') {
@@ -72,7 +72,7 @@ const prepareEventProps = (
   }, {} as Record<string, string | boolean | number | null>);
 };
 
-export default ({ apiKey, propsMapping = {}, eventsMapping = {} }: CarrotquestOptions): object => ({
+export default ({ apiKey, propsMapping = {}, eventsMapping = {} }: CarrotquestOptions): Plugin => ({
   name: 'carrotquest',
 
   initialize: (): void => {
