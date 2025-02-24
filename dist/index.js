@@ -52,7 +52,7 @@ const prepareEventProps = (props = {}, propsMapping) => {
         return acc;
     }, {});
 };
-export default ({ apiKey, propsMapping = {}, eventsMapping = {} }) => ({
+export default ({ apiKey, userPropsMapping = {}, eventPropsMapping = {}, eventsMapping = {} }) => ({
     name: 'carrotquest',
     initialize: () => {
         if (apiKey) {
@@ -62,7 +62,7 @@ export default ({ apiKey, propsMapping = {}, eventsMapping = {} }) => ({
     loaded: () => typeof window.carrotquest !== 'undefined',
     identify: ({ payload }) => {
         const { traits } = payload;
-        const preparedProps = prepareUserProps(traits, propsMapping);
+        const preparedProps = prepareUserProps(traits, userPropsMapping);
         if (preparedProps.length > 0) {
             window.carrotquest.identify(preparedProps);
         }
@@ -71,7 +71,7 @@ export default ({ apiKey, propsMapping = {}, eventsMapping = {} }) => ({
         const { event, properties } = payload;
         const eventName = eventsMapping[event];
         if (eventName) {
-            const preparedProps = prepareEventProps(properties, propsMapping);
+            const preparedProps = prepareEventProps(properties, eventPropsMapping);
             window.carrotquest.track(eventName, preparedProps);
         }
     },
@@ -81,7 +81,7 @@ export default ({ apiKey, propsMapping = {}, eventsMapping = {} }) => ({
         },
         deleteProps: (props) => {
             const normalizedProps = Object.fromEntries(props.map((prop) => [prop, null]));
-            const preparedProps = prepareUserProps(normalizedProps, propsMapping, 'delete');
+            const preparedProps = prepareUserProps(normalizedProps, userPropsMapping, 'delete');
             window.carrotquest.identify(preparedProps);
         },
     },

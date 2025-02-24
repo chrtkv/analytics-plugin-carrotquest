@@ -1,4 +1,4 @@
-import { CarrotquestOptions, CarrotquestMethods, CarrotquestUserProp, Plugin } from '@/types/carrotquest';
+import { CarrotquestOptions, CarrotquestMethods, CarrrotquestEventProps, CarrotquestUserProp, Plugin } from '@/types/carrotquest';
 
 const initCarrotquest = (apiKey: CarrotquestOptions['apiKey']): void => {
   if (typeof window.carrotquest === 'undefined') {
@@ -58,7 +58,7 @@ const prepareUserProps = (
 const prepareEventProps = (
   props: Record<string, string | boolean | number | null> = {},
   propsMapping: Record<string, string>
-): Record<string, string | boolean | number | null> | null => {
+): CarrrotquestEventProps | null => {
   if (Object.keys(props).length === 0) {
     return null;
   }
@@ -69,10 +69,10 @@ const prepareEventProps = (
       acc[newKey] = value;
     }
     return acc;
-  }, {} as Record<string, string | boolean | number | null>);
+  }, {} as CarrrotquestEventProps);
 };
 
-export default ({ apiKey, propsMapping = {}, eventsMapping = {} }: CarrotquestOptions): Plugin => ({
+export default ({ apiKey, userPropsMapping = {}, eventPropsMapping = {}, eventsMapping = {} }: CarrotquestOptions): Plugin => ({
   name: 'carrotquest',
 
   initialize: (): void => {
@@ -90,7 +90,7 @@ export default ({ apiKey, propsMapping = {}, eventsMapping = {} }: CarrotquestOp
     };
   }): void => {
     const { traits } = payload;
-    const preparedProps = prepareUserProps(traits, propsMapping);
+    const preparedProps = prepareUserProps(traits, userPropsMapping);
 
     if (preparedProps.length > 0) {
       window.carrotquest.identify(preparedProps);
@@ -107,7 +107,7 @@ export default ({ apiKey, propsMapping = {}, eventsMapping = {} }: CarrotquestOp
     const eventName = eventsMapping[event];
 
     if (eventName) {
-      const preparedProps = prepareEventProps(properties, propsMapping);
+      const preparedProps = prepareEventProps(properties, eventPropsMapping);
       window.carrotquest.track(eventName, preparedProps);
     }
   },
@@ -119,7 +119,7 @@ export default ({ apiKey, propsMapping = {}, eventsMapping = {} }: CarrotquestOp
 
     deleteProps: (props: string[]): void => {
       const normalizedProps = Object.fromEntries(props.map((prop) => [prop, null]));
-      const preparedProps = prepareUserProps(normalizedProps, propsMapping, 'delete');
+      const preparedProps = prepareUserProps(normalizedProps, userPropsMapping, 'delete');
       window.carrotquest.identify(preparedProps);
     },
   },

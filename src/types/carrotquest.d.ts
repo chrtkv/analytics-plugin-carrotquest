@@ -5,7 +5,8 @@ export interface Plugin {
 
 export interface CarrotquestOptions {
   apiKey: string;
-  propsMapping?: Record<string, string>;
+  userPropsMapping?: Record<string, string>;
+  eventPropsMapping?: Record<string, string>;
   eventsMapping?: Record<string, string>;
 }
 
@@ -14,6 +15,8 @@ export interface CarrotquestUserProp {
   key: string;
   value: string | boolean | number | null;
 }
+
+export type CarrrotquestEventProps = Record<string, string | boolean | number | null>;
 
 export type CarrotquestMethods = 'connect' | 'track' | 'identify' | 'auth' | 'onReady' | 'addCallback' | 'removeCallback' | 'trackMessageInteraction';
 
