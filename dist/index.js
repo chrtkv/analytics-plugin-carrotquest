@@ -52,7 +52,7 @@ const prepareEventProps = (props = {}, propsMapping) => {
         return acc;
     }, {});
 };
-export default ({ apiKey, propsMapping, eventsMapping }) => ({
+export default ({ apiKey, propsMapping = {}, eventsMapping = {} }) => ({
     name: 'carrotquest',
     initialize: () => {
         if (apiKey) {
