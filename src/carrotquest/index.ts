@@ -1,4 +1,4 @@
-import { CarrotquestOptions, CarrotquestMethods, CarrotquestProp } from '@/types/carrotquest';
+import { CarrotquestOptions, CarrotquestMethods, CarrotquestUserProp } from '@/types/carrotquest';
 
 const initCarrotquest = (apiKey: CarrotquestOptions['apiKey']): void => {
   if (typeof window.carrotquest === 'undefined') {
@@ -31,7 +31,7 @@ const prepareUserProps = (
   props: Record<string, string | boolean | number | null>,
   propsMapping: Record<string, string>,
   operation = 'update_or_create'
-): CarrotquestProp[] => {
+): CarrotquestUserProp[] => {
   const defaultPropsMapping: Record<string, string> = {
     email: '$email',
     name: '$name',
@@ -41,7 +41,7 @@ const prepareUserProps = (
   const mapping = { ...defaultPropsMapping, ...propsMapping };
 
   return Object.keys(mapping)
-    .map((key: string): CarrotquestProp | null => {
+    .map((key: string): CarrotquestUserProp | null => {
       if (typeof props[key] === 'undefined') {
         return null;
       }
@@ -52,7 +52,7 @@ const prepareUserProps = (
         value: props[key],
       };
     })
-    .filter((prop): prop is CarrotquestProp => prop !== null);
+    .filter((prop): prop is CarrotquestUserProp => prop !== null);
 };
 
 const prepareEventProps = (
@@ -72,7 +72,7 @@ const prepareEventProps = (
   }, {} as Record<string, string | boolean | number | null>);
 };
 
-export default ({ apiKey, propsMapping, eventsMapping }: CarrotquestOptions): object => ({
+export default ({ apiKey, propsMapping = {}, eventsMapping = {} }: CarrotquestOptions): object => ({
   name: 'carrotquest',
 
   initialize: (): void => {
@@ -120,7 +120,6 @@ export default ({ apiKey, propsMapping, eventsMapping }: CarrotquestOptions): ob
     deleteProps: (props: string[]): void => {
       const normalizedProps = Object.fromEntries(props.map((prop) => [prop, null]));
       const preparedProps = prepareUserProps(normalizedProps, propsMapping, 'delete');
-
       window.carrotquest.identify(preparedProps);
     },
   },

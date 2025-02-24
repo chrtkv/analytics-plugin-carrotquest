@@ -1,10 +1,10 @@
 export interface CarrotquestOptions {
   apiKey: string;
-  propsMapping: Record<string, string>;
-  eventsMapping: Record<string, string>;
+  propsMapping?: Record<string, string>;
+  eventsMapping?: Record<string, string>;
 }
 
-export interface CarrotquestProp {
+export interface CarrotquestUserProp {
   op: string;
   key: string;
   value: string | boolean | number | null;
