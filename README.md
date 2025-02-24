@@ -22,7 +22,7 @@ Provide the plugin with the following configuration. The `apiKey` is required an
 
 Only defined properties and events will be sent to CarrotQuest.
 
-```json
+```javascript
 {
   apiKey: YOUR_API_KEY,
   eventsMapping: {
