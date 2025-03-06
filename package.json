@@ -20,10 +20,15 @@
   "homepage": "https://github.com/Hexlet/analytics-plugin-carrotquest#readme",
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@stylistic/eslint-plugin": "^4.2.0",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
     "eslint": "^9.20.1",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.24.0"
+  },
+  "dependencies": {
+    "jiti": "^2.4.2",
+    "release-it": "^18.1.2"
   }
 }
