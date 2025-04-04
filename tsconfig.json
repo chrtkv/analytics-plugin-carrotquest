@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "module": "ESNext",
+    "rootDir": "src",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "target": "ES2020",
     "strict": true,
     "declaration": true,
@@ -9,12 +11,9 @@
     "noUnusedParameters": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["src/*"]
     }
   },
-  "include": [
-    "**/*",
-  ]
+  "include": ["src/**/*", "eslint.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }
