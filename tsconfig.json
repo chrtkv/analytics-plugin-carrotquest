@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
     "module": "NodeNext",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsbuildinfo.json",
     "moduleResolution": "NodeNext",
     "target": "ES2020",
     "strict": true,
@@ -14,6 +14,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "eslint.config.ts"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }
