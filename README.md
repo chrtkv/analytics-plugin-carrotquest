@@ -4,7 +4,7 @@
 
 This plugin integrates CarrotQuest into your project, allowing to track user interactions and events.
 
-## Installation (пока не работает)
+## Installation
 
 To install the plugin, run:
 

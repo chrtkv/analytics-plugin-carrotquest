@@ -1,8 +1,3 @@
-// export interface Plugin {
-//   name: string
-//   [key: string]: unknown
-// }
-
 export interface Config {
   apiKey: string
   enabled?: boolean
@@ -23,7 +18,10 @@ export type CarrotquestMethod = 'connect' | 'track' | 'identify' | 'auth' | 'onR
 
 declare global {
   interface Window {
-    carrotquest: any // eslint-disable-line @typescript-eslint/no-explicit-any
-    carrotquestasync: any // eslint-disable-line @typescript-eslint/no-explicit-any
+    carrotquest: {
+      [key: string]: any // eslint-disable-line @typescript-eslint/no-explicit-any
+      settings?: Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
+    }
+    carrotquestasync: any[] // eslint-disable-line @typescript-eslint/no-explicit-any
   }
 }

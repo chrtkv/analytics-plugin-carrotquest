@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "module": "ESNext",
+    "module": "NodeNext",
+    "tsBuildInfoFile": "./node_modules/.tmp/tsbuildinfo.json",
+    "moduleResolution": "NodeNext",
     "target": "ES2020",
     "strict": true,
     "declaration": true,
@@ -9,12 +11,9 @@
     "noUnusedParameters": false,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["src/*"]
     }
   },
-  "include": [
-    "**/*",
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }
