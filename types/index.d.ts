@@ -12,7 +12,7 @@ export interface CarrotquestUserProps {
   value: string | boolean | number | null
 }
 
-export type CarrrotquestEventProps = Record<string, string | boolean | number | null>
+export type CarrotquestEventProps = Record<string, string | boolean | number | null>
 
 export type CarrotquestMethod = 'connect' | 'track' | 'identify' | 'auth' | 'onReady' | 'addCallback' | 'removeCallback' | 'trackMessageInteraction'
 

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-import { Config, CarrotquestMethod, CarrrotquestEventProps, CarrotquestUserProps } from '@/src/types/index.js'
+import { Config, CarrotquestMethod, CarrotquestEventProps, CarrotquestUserProps } from '@types'
 
 const initCarrotquest = (apiKey: Config['apiKey']): void => {
   if (typeof window.carrotquest === 'undefined') {
@@ -42,35 +41,29 @@ const prepareUserProps = (
   const mapping = { ...defaultPropsMapping, ...propsMapping }
 
   return Object.keys(mapping)
-    .map((key: string): CarrotquestUserProps | null => {
-      if (typeof props[key] === 'undefined') {
-        return null
-      }
-
-      return {
-        op: operation,
-        key: mapping[key],
-        value: props[key],
-      }
-    })
-    .filter((prop): prop is CarrotquestUserProps => prop !== null)
+    .filter(key => propsMapping[key] !== undefined)
+    .map((key: string): CarrotquestUserProps => ({
+      op: operation,
+      key: mapping[key],
+      value: props[key],
+    }))
 }
 
 const prepareEventProps = (
   props: Record<string, string | boolean | number | null> = {},
   propsMapping: Record<string, string>,
-): CarrrotquestEventProps | null => {
+): CarrotquestEventProps => {
   if (Object.keys(props).length === 0) {
-    return null
+    return {}
   }
 
-  return Object.entries(props).reduce((acc, [key, value]) => {
+  return Object.entries(props).reduce((acc: CarrotquestEventProps, [key, value]) => {
     const newKey = propsMapping[key]
     if (newKey) {
       acc[newKey] = value
     }
     return acc
-  }, {} as CarrrotquestEventProps)
+  }, {})
 }
 
 export default ({ apiKey, enabled, userPropsMapping = {}, eventPropsMapping = {}, eventsMapping = {} }: Config) => ({
