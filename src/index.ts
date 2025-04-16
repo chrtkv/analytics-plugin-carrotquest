@@ -75,7 +75,12 @@ export default ({ apiKey, enabled, userPropsMapping = {}, eventPropsMapping = {}
     }
   },
 
-  loaded: (): boolean => typeof window.carrotquest !== 'undefined',
+  loaded: (): boolean => {
+    if (!enabled) {
+      return false
+    }
+    return typeof window.carrotquest === 'object'
+  },
 
   identify: ({ payload }: {
     payload: {
