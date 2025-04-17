@@ -16,12 +16,6 @@ export type CarrotquestEventProps = Record<string, string | boolean | number | n
 
 export type CarrotquestMethod = 'connect' | 'track' | 'identify' | 'auth' | 'onReady' | 'addCallback' | 'removeCallback' | 'trackMessageInteraction'
 
-// src/types/global.d.ts
-// import { CarrotquestMethod } from './types'  // ваш уже существующий файл types.ts
-
-// Опишите, какие методы поддерживает carrotquest
-// type CarrotquestMethods = Record<CarrotquestMethod, (...args: unknown[]) => void>
-
 interface CarrotquestMethods {
   connect(apiKey: string): void
   track(eventName: string, props?: CarrotquestEventProps): void
@@ -36,7 +30,7 @@ interface CarrotquestMethods {
 
 declare global {
   interface Window {
-    /** Основной объект Carrotquest API с обязательными методами */
+    // Main Carrotquest object with required methods
     carrotquest: {
       connect(apiKey: string): void
       track(eventName: string, props?: CarrotquestEventProps): void
@@ -48,7 +42,7 @@ declare global {
       trackMessageInteraction(messageId: string): void
       settings: Record<string, unknown>
     }
-    /** Очередь вызовов до загрузки скрипта */
+    // Queue of calls before the script is loaded
     carrotquestasync: unknown[]
   }
 }

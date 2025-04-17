@@ -8,10 +8,10 @@ const initCarrotquest = (apiKey: Config['apiKey']): void => {
     script.src = 'https://cdn.carrotquest.app/api.min.js'
     document.head.appendChild(script)
 
-    // Инициализируем очередь вызовов
+    // Initialize the queue of calls before the script is loaded
     window.carrotquestasync = []
 
-    // соберём заглушку со всеми методами и settings
+    // Create a stub for the Carrotquest object with all methods and settings
     const stub: Partial<Window['carrotquest']> & { settings: Record<string, unknown> } = {
       settings: {},
     }
@@ -27,7 +27,7 @@ const initCarrotquest = (apiKey: Config['apiKey']): void => {
     ]
     methods.forEach((method) => {
       stub[method] = (...args: unknown[]) => {
-        // push два отдельных элемента: имя метода и массив аргументов
+        // push two separate elements: method name and array of arguments
         window.carrotquestasync.push(method, args)
       }
     })
