@@ -8,20 +8,30 @@ const initCarrotquest = (apiKey: Config['apiKey']): void => {
     script.src = 'https://cdn.carrotquest.app/api.min.js'
     document.head.appendChild(script)
 
-    window.carrotquest = {}
+    // Инициализируем очередь вызовов
     window.carrotquestasync = []
-    window.carrotquest.settings = {}
 
+    // соберём заглушку со всеми методами и settings
+    const stub: Partial<Window['carrotquest']> & { settings: Record<string, unknown> } = {
+      settings: {},
+    }
     const methods: CarrotquestMethod[] = [
-      'connect', 'track', 'identify', 'auth', 'onReady',
-      'addCallback', 'removeCallback', 'trackMessageInteraction',
+      'connect',
+      'track',
+      'identify',
+      'auth',
+      'onReady',
+      'addCallback',
+      'removeCallback',
+      'trackMessageInteraction',
     ]
-
     methods.forEach((method) => {
-      window.carrotquest[method] = function () {
-        window.carrotquestasync.push(method, arguments) // eslint-disable-line prefer-rest-params
+      stub[method] = (...args: unknown[]) => {
+        // push два отдельных элемента: имя метода и массив аргументов
+        window.carrotquestasync.push(method, args)
       }
     })
+    window.carrotquest = stub as Window['carrotquest']
   }
 
   window.carrotquest.connect(apiKey)
