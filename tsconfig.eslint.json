@@ -3,6 +3,5 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": ["src/**/*", "types/**/*", "eslint.config.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src", "eslint.config.ts"]
 }

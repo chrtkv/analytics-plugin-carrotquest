@@ -1,4 +1,4 @@
-import { Config, CarrotquestMethod, CarrotquestEventProps, CarrotquestUserProps } from '@types'
+import { Config, CarrotquestMethod, CarrotquestEventProps, CarrotquestUserProps } from '../types'
 
 const initCarrotquest = (apiKey: Config['apiKey']): void => {
   if (typeof window.carrotquest === 'undefined') {
