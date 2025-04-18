@@ -1,5 +1,5 @@
 build:
-	npm run build
+	rm -rf dist && npm run build
 
 lint:
 	npx eslint .
